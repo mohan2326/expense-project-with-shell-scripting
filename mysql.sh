@@ -38,3 +38,10 @@ VALIDATE $? "Starting MySQL Server"
 
 mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
 VALIDATE $? "Setting up root password"
+
+
+# idempotency
+# ----------------
+# it is a nature of program irrespective of how many times you run it should not change result...
+
+# Shell script is not idempotent in nature, so we need to take care
