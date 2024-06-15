@@ -8,6 +8,8 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
+echo "Please enter DB password:"
+read -s mysql_root_password
 
 VALIDATE(){
    if [ $1 -ne 0 ]
@@ -40,11 +42,11 @@ VALIDATE $? "Starting MySQL Server"
 # VALIDATE $? "Setting up root password"
 
 #Below code will be useful for idempotent nature
-mysql -h db.mohansaivenna.cloud -uroot -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+mysql -h db.mohansaivenna.cloud -uroot -p${mysql_root_password}  -e 'show databases;' &>>$LOGFILE
 if [ $? -ne 0 ]
 then
-    mysql_secure_installation --set-root-pass ExpenseApp@1
-    ${mysql_root_password} 
+    mysql_secure_installation --set-root-pass ${mysql_root_password} 
+    
     #&>>$LOGFILE
     VALIDATE $? "MySQL Root password Setup"
 else
@@ -57,3 +59,5 @@ fi
 # it is a nature of program irrespective of how many times you run it should not change result...
 
 # Shell script is not idempotent in nature, so we need to take care
+
+#I don't show the password in the script; so im using my read command to enter the password at the starting
