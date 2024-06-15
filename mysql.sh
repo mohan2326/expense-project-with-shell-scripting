@@ -61,3 +61,12 @@ fi
 # Shell script is not idempotent in nature, so we need to take care
 
 #I don't show the password in the script; so im using my read command to enter the password at the starting
+
+# Output:
+#     [ ec2-user@ip-172-31-19-108 ~/expense-project-with-shell-scripting ]$ sudo sh mysql.sh 
+#     Please enter DB password:
+#     You are super user.
+#     Installing MySQL Server... SUCCESS 
+#     Enabling MySQL Server... SUCCESS 
+#     Starting MySQL Server... SUCCESS 
+#     MySQL Root password is already setup... SKIPPING 
