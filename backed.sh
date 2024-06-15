@@ -38,17 +38,55 @@ VALIDATE $? "Enabling nodejs:20 version"
 dnf install nodejs -y &>>$LOGFILE
 VALIDATE $? "Installing nodejs"
 
-useradd expense
-VALIDATE $? "Creating expense user"
+# useradd expense
+# VALIDATE $? "Creating expense user"
 
-# id expense &>>$LOGFILE
-# if [ $? -ne 0 ]
-# then
-#     useradd expense &>>$LOGFILE
-#     VALIDATE $? "Creating expense user"
-# else
-#     echo -e "Expense user already created...$Y SKIPPING $N"
-# fi
+# # Output:
+
+#     Please enter DB password:
+#     You are super user.
+#     Disabling default nodejs... SUCCESS 
+#     Enabling nodejs:20 version... SUCCESS 
+#     Installing nodejs... SUCCESS 
+#     Creating expense user... SUCCESS 
+
+#     [ ec2-user@ip-172-31-16-86 ~/expense-project-with-shell-scripting ]$ sudo sh backed.sh
+#     Please enter DB password:
+#     You are super user.
+#     Disabling default nodejs... SUCCESS 
+#     Enabling nodejs:20 version... SUCCESS 
+#     Installing nodejs... SUCCESS 
+#     useradd: user 'expense' already exists (if we run the script again we are getting this)
+#     Creating expense user... FAILURE 
+
+#     [ ec2-user@ip-172-31-16-86 ~/expense-project-with-shell-scripting ]$ id ec2-user
+#     uid=1001(ec2-user) gid=1001(ec2-user) groups=1001(ec2-user)
+
+#     [ ec2-user@ip-172-31-16-86 ~/expense-project-with-shell-scripting ]$ echo $?
+#     0
+
+#     [ ec2-user@ip-172-31-16-86 ~/expense-project-with-shell-scripting ]$ id expense
+#     uid=1002(expense) gid=1002(expense) groups=1002(expense)
+
+#     [ ec2-user@ip-172-31-16-86 ~/expense-project-with-shell-scripting ]$ echo $?
+#     0
+
+#     [ ec2-user@ip-172-31-16-86 ~/expense-project-with-shell-scripting ]$ id mohan
+#     id: ‘mohan’: no such user
+
+#     [ ec2-user@ip-172-31-16-86 ~/expense-project-with-shell-scripting ]$ echo $?
+#     1
+
+# The above can we be written in the based on the number
+
+id expense &>>$LOGFILE
+if [ $? -ne 0 ]
+then
+    useradd expense &>>$LOGFILE
+    VALIDATE $? "Creating expense user"
+else
+    echo -e "Expense user already created...$Y SKIPPING $N"
+fi
 
 # mkdir -p /app &>>$LOGFILE
 # VALIDATE $? "Creating app directory"
