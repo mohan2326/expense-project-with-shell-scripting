@@ -122,7 +122,7 @@ VALIDATE $? "Installing MySQL Client"
 systemctl enable mysqld &>>$LOGFILE
 VALIDATE $? "Enabling MySQL Client"
 
-systemctl start mysqld -y &>>$LOGFILE
+systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "Starting MySQL Client"
 
 mysql -h db.mohansaivenna.cloud -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE
