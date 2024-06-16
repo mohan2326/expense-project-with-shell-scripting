@@ -116,7 +116,7 @@ VALIDATE $? "Starting backend"
 systemctl enable backend &>>$LOGFILE
 VALIDATE $? "Enabling backend"
 
-dnf install mysql -y &>>$LOGFILE
+dnf install mysql-server -y &>>$LOGFILE
 VALIDATE $? "Installing MySQL Client"
 
 systemctl enable mysqld &>>$LOGFILE
