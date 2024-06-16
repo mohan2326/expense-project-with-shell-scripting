@@ -118,8 +118,8 @@ VALIDATE $? "Enabling backend"
 dnf install mysql -y &>>$LOGFILE
 VALIDATE $? "Installing MySQL Client"
 
-# mysql -h db.mohansaivenna.cloud -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE
-# VALIDATE $? "Schema loading"
+mysql -h db.mohansaivenna.cloud -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE
+VALIDATE $? "Schema loading"
 
-# systemctl restart backend &>>$LOGFILE
-# VALIDATE $? "Restarting Backend"
+systemctl restart backend &>>$LOGFILE
+VALIDATE $? "Restarting Backend"
